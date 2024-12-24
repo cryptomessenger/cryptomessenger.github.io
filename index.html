@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cryptomessenger</title>
-  <link rel="stylesheet" href="/css/output-5aa012ef6c2f5401278101d7fbbd64ff.min.css">
+  <link rel="stylesheet" href="/css/output-ce7221c2541c37a713eec13a2dbcb10d.min.css">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
@@ -24,6 +24,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
+
 </head>
 <body class="text-white bg-zinc-950">
   <div class="max-w-3xl mx-auto p-2">
@@ -82,7 +83,7 @@
       <div class="mb-4">
         <div class="flex justify-between items-end mb-0.5">
           <div>
-            <label for="parameter-p">Parameter p</label>
+            <label for="parameters">Parameters</label>
           </div>
           <a
             href="https://github.com/cryptomessenger/dh-generator"
@@ -93,8 +94,8 @@
           </a>
         </div>
         <textarea
-          id="parameter-p"
-          oninput="expandTextarea('parameter-p')"
+          id="parameters"
+          oninput="expandTextarea('parameters')"
           rows="4"
           class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
             hover:border-zinc-700 focus:border-teal-700 outline-none break-all"
@@ -146,7 +147,7 @@
         <button
           type="button"
           onclick="createConfigA()"
-          class="bg-zinc-700 hover:bg-teal-700 py-1.5 px-3 rounded font-semibold"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 px-3 rounded font-semibold"
         >
           Create and copy configuration A
         </button>
@@ -194,7 +195,7 @@
         <button
           type="button"
           onclick="createConfigB()"
-          class="bg-zinc-700 hover:bg-teal-700 py-1.5 px-3 rounded font-semibold"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 px-3 rounded font-semibold"
         >
           Create and copy configuration B
         </button>
@@ -242,7 +243,7 @@
         <button
           type="button"
           onclick="generateKeyChat()"
-          class="bg-zinc-700 hover:bg-teal-700 py-1.5 px-3 rounded font-semibold"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 px-3 rounded font-semibold"
         >
           Generate key
         </button>
@@ -275,7 +276,8 @@
             <button
               type="button"
               onclick="encryptMessage(this)"
-              class="bg-zinc-700 hover:bg-teal-700 py-1.5 rounded font-semibold w-full mt-2"
+              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 rounded
+                font-semibold w-full mt-2"
             >
               Encrypt and copy
             </button>
@@ -306,7 +308,8 @@
             <button
               type="button"
               onclick="decryptMessage()"
-              class="bg-zinc-700 hover:bg-teal-700 py-1.5 rounded font-semibold w-full mt-2"
+              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 rounded
+                font-semibold w-full mt-2"
             >
               Decrypt
             </button>
@@ -384,7 +387,8 @@
           <button
             type="button"
             onclick="symmetricEncrypt()"
-            class="bg-zinc-700 hover:bg-teal-700 py-1.5 rounded font-semibold w-full mt-2"
+            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5
+              rounded font-semibold w-full mt-2"
           >
             Encrypt
           </button>
@@ -415,7 +419,8 @@
           <button
             type="button"
             onclick="symmetricDecrypt()"
-            class="bg-zinc-700 hover:bg-teal-700 py-1.5 rounded font-semibold w-full mt-2"
+            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5
+              rounded font-semibold w-full mt-2"
           >
             Decrypt
           </button>
@@ -423,6 +428,6 @@
       </div>
     </div>
   </div>
-  <script src="/js/main.js"></script>
+  <script src="/js/main-f8ac4a1cd6045e6ef6a88de8344610f5.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ function encryptMessage(btn) {
     if (message === '') {
         return 0;
     }
-    let configArray = document.getElementById('config').value.split('|');
+    let configArray = document.getElementById('config').value.split('_');
     let user = configArray[0];
     if (user === 'A') {
         user = 'B';
@@ -20,7 +20,7 @@ function encryptMessage(btn) {
     let encryptedArray = [user];
     encryptedArray.push(CryptoJS.enc.Base64.stringify(iv));
     encryptedArray.push(ciphertext);
-    let encrypted = encryptedArray.join('|');
+    let encrypted = encryptedArray.join('_');
     navigator.clipboard.writeText(encrypted).then(() => {
         btn.innerHTML = 'Copied';
         setTimeout(() => {
@@ -34,7 +34,7 @@ function decryptMessage() {
     if (encrypted === '') {
         return 0;
     }
-    let encryptedArray = encrypted.split('|');
+    let encryptedArray = encrypted.split('_');
     let user = encryptedArray[0];
     let iv = CryptoJS.enc.Base64.parse(encryptedArray[1]);
     let ciphertext = encryptedArray[2];
@@ -60,7 +60,7 @@ function symmetricEncrypt() {
     encryptedArray.push(CryptoJS.enc.Base64.stringify(salt));
     encryptedArray.push(CryptoJS.enc.Base64.stringify(iv));
     encryptedArray.push(ciphertext);
-    let encrypted = encryptedArray.join('|');
+    let encrypted = encryptedArray.join('_');
     document.getElementById('encrypted-message-symmetric').value = encrypted;
     expandTextarea('encrypted-message-symmetric');
 }
@@ -71,7 +71,7 @@ function symmetricDecrypt() {
     if (encrypted === '' || password === '') {
         return 0;
     }
-    let encryptedArray = encrypted.split('|');
+    let encryptedArray = encrypted.split('_');
     let iterations = parseInt(encryptedArray[0]);
     let salt = CryptoJS.enc.Base64.parse(encryptedArray[1]);
     let iv = CryptoJS.enc.Base64.parse(encryptedArray[2]);
@@ -85,52 +85,57 @@ function symmetricDecrypt() {
 }
 
 function createConfigA() {
-    let parameterP = bigInt(document.getElementById('parameter-p').value);
+    let parameters = document.getElementById('parameters').value;
+    let parametersArray = parameters.split('_');
+    let parameterG = parseInt(parametersArray[0]);
+    let parameterP = bigInt(parametersArray[1]);
     let password = document.getElementById('password-create').value;
     if (parameterP.bitLength() < 1024 || password === '') {
         return 0;
     }
     let iterations = parseInt(document.getElementById('iterations-create').value);
     let privateKey = passwordToPrivateKey(password, parameterP);
-    let publicKey = bigInt(2).modPow(privateKey, parameterP);
+    let publicKey = bigInt(parameterG).modPow(privateKey, parameterP);
     let salt = CryptoJS.lib.WordArray.random(32);
-    let configArray = ['A', CryptoJS.enc.Base64.stringify(salt)];
-    configArray.push(iterations.toString());
-    configArray.push(parameterP.toString())
+    let configArray = ['A', iterations.toString()];
+    configArray.push(CryptoJS.enc.Base64.stringify(salt));
+    configArray.push(parameterG.toString());
+    configArray.push(parameterP.toString());
     configArray.push(publicKey.toString());
-    let config = configArray.join('|');
+    let config = configArray.join('_');
     navigator.clipboard.writeText(config).then(() => {
         document.getElementById('copied-a').classList.remove('hidden');
     });
 }
 
 function createConfigB() {
-    let configArray = document.getElementById('config-a').value.split('|');
+    let configArray = document.getElementById('config-a').value.split('_');
     let password = document.getElementById('password-confirm').value;
-    if (configArray.length < 5 || password === '') {
+    if (configArray.length < 6 || password === '') {
         return 0;
     }
-    let parameterP = bigInt(configArray[3]);
+    let parameterG = parseInt(configArray[3]);
+    let parameterP = bigInt(configArray[4]);
     let privateKey = passwordToPrivateKey(password, parameterP);
-    let publicKey = bigInt(2).modPow(privateKey, parameterP);
+    let publicKey = bigInt(parameterG).modPow(privateKey, parameterP);
     configArray[0] = 'B';
-    configArray[4] = publicKey.toString();
-    let config = configArray.join('|');
+    configArray[5] = publicKey.toString();
+    let config = configArray.join('_');
     navigator.clipboard.writeText(config).then(() => {
         document.getElementById('copied-b').classList.remove('hidden');
     });
 }
 
 function generateKeyChat() {
-    let configArray = document.getElementById('config').value.split('|');
+    let configArray = document.getElementById('config').value.split('_');
     let password = document.getElementById('password-chat').value;
-    if (configArray.length < 5 || password === '') {
+    if (configArray.length < 6 || password === '') {
         return 0;
     }
-    let salt = CryptoJS.enc.Base64.parse(configArray[1]);
-    let iterations = parseInt(configArray[2]);
-    let parameterP = bigInt(configArray[3]);
-    let interlocutorPublicKey = bigInt(configArray[4]);
+    let iterations = parseInt(configArray[1]);
+    let salt = CryptoJS.enc.Base64.parse(configArray[2]);
+    let parameterP = bigInt(configArray[4]);
+    let interlocutorPublicKey = bigInt(configArray[5]);
     let privateKey = passwordToPrivateKey(password, parameterP);
     let sharedKey = bigInt(interlocutorPublicKey).modPow(privateKey, parameterP);
     key = generateKey(sharedKey.toString(), salt, iterations);
