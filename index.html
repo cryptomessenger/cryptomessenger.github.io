@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cryptomessenger</title>
-  <link rel="stylesheet" href="/css/output-5c803752d02750fa1cbf374f5c5fd21b.min.css">
+  <link rel="stylesheet" href="/css/output-f04799089a.min.css">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
@@ -28,7 +28,7 @@
 <body class="text-neutral-50 bg-zinc-950">
   <div class="max-w-3xl mx-auto p-2">
     <div class="flex justify-between items-center gap-2 mb-2">
-      <div class="text-lg font-medium">Cryptomessenger</div>
+      <div class="text-lg font-bold">Cryptomessenger</div>
       <div class="mt-0.5">
         <a
           href="https://github.com/cryptomessenger/cryptomessenger.github.io"
@@ -43,54 +43,69 @@
     <div class="grid sm:grid-cols-2 gap-2 mb-8">
       <div class="grid grid-cols-2 gap-2">
         <button
-          type="button"
           onclick="selectTab('create')"
           id="create-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700 disabled:border-teal-700"
+          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
+            disabled:border-teal-700 disabled:font-semibold"
         >
           Create
         </button>
         <button
-          type="button"
           onclick="selectTab('confirm')"
           id="confirm-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700 disabled:border-teal-700"
+          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
+            disabled:border-teal-700 disabled:font-semibold"
         >
           Confirm
         </button>
       </div>
       <div class="grid grid-cols-2 gap-2">
         <button
-          type="button"
           onclick="selectTab('chat')"
           id="chat-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700 disabled:border-teal-700"
+          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
+            disabled:border-teal-700 disabled:font-semibold"
         >
           Chat
         </button>
         <button
-          type="button"
           onclick="selectTab('symmetric')"
           id="symmetric-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700 disabled:border-teal-700"
+          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
+            disabled:border-teal-700 disabled:font-semibold"
         >
           Symmetric
         </button>
       </div>
     </div>
     <div id="create-tab" class="mb-8 hidden">
+      <div class="grid sm:grid-cols-2 gap-2 mb-4 text-center">
+        <button
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded font-semibold"
+          onclick="setDefaultParameters()"
+        >
+          Set default parameters
+        </button>
+        <a
+          href="https://github.com/cryptomessenger/dh-generator"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded font-semibold"
+          target="_blank"
+        >
+          Generate parameters <i class="bi bi-arrow-up-right text-sm"></i>
+        </a>
+      </div>
       <div class="mb-4">
         <div class="flex justify-between items-end mb-0.5">
           <div>
             <label for="parameters">Parameters</label>
           </div>
-          <a
-            href="https://github.com/cryptomessenger/dh-generator"
-            class="text-sm text-teal-600 hover:underline decoration-1 underline-offset-1"
-            target="_blank"
+          <button
+            onclick="clearInput('parameters')"
+            class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
+            title="Clear"
           >
-            generator<i class="bi bi-arrow-up-right"></i>
-          </a>
+            <i class="bi bi-x-lg flex w-3.5 h-3.5 text-sm"></i>
+          </button>
         </div>
         <textarea
           id="parameters"
@@ -111,10 +126,9 @@
             type="password"
             id="password-create"
             class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none"
+              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
           >
           <button
-            type="button"
             onclick="switchPassword(this, 'password-create')"
             class="absolute p-2 text-zinc-600 hover:text-teal-600"
             style="right: 3px; bottom: 3px;"
@@ -144,9 +158,8 @@
       </div>
       <div class="flex justify-center">
         <button
-          type="button"
           onclick="createConfigA()"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 px-3 rounded font-medium"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 sm:px-7 rounded font-semibold"
         >
           Create and copy configuration A
         </button>
@@ -177,10 +190,9 @@
             type="password"
             id="password-confirm"
             class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none"
+              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
           >
           <button
-            type="button"
             onclick="switchPassword(this, 'password-confirm')"
             class="absolute p-2 text-zinc-600 hover:text-teal-600"
             style="right: 3px; bottom: 3px;"
@@ -192,9 +204,8 @@
       </div>
       <div class="flex justify-center">
         <button
-          type="button"
           onclick="createConfigB()"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 px-3 rounded font-medium"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 sm:px-7 rounded font-semibold"
         >
           Create and copy configuration B
         </button>
@@ -225,10 +236,9 @@
             type="password"
             id="password-chat"
             class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none"
+              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
           >
           <button
-            type="button"
             onclick="switchPassword(this, 'password-chat')"
             class="absolute p-2 text-zinc-600 hover:text-teal-600"
             style="right: 3px; bottom: 3px;"
@@ -240,9 +250,8 @@
       </div>
       <div class="flex justify-center">
         <button
-          type="button"
           onclick="generateKeyChat()"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 px-3 rounded font-medium"
+          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 sm:px-7 rounded font-semibold"
         >
           Generate key
         </button>
@@ -255,7 +264,6 @@
                 <label for="message-chat">Message</label>
               </div>
               <button
-                type="button"
                 onclick="clearInput('message-chat')"
                 class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
                 title="Clear"
@@ -273,10 +281,9 @@
               spellcheck="false"
             ></textarea>
             <button
-              type="button"
               onclick="encryptMessage(this)"
-              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 rounded
-                font-medium w-full mt-2"
+              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded
+                font-semibold w-full mt-2"
             >
               Encrypt and copy
             </button>
@@ -287,7 +294,6 @@
                 <label for="encrypted-message-chat">Encrypted message</label>
               </div>
               <button
-                type="button"
                 onclick="clearInput('encrypted-message-chat')"
                 class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
                 title="Clear"
@@ -305,10 +311,9 @@
               spellcheck="false"
             ></textarea>
             <button
-              type="button"
               onclick="decryptMessage()"
-              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5 rounded
-                font-medium w-full mt-2"
+              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded
+                font-semibold w-full mt-2"
             >
               Decrypt
             </button>
@@ -328,10 +333,9 @@
             type="password"
             id="password-symmetric"
             class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none resize-none"
+              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
           >
           <button
-            type="button"
             onclick="switchPassword(this, 'password-symmetric')"
             class="absolute p-2 text-zinc-600 hover:text-teal-600"
             style="right: 3px; bottom: 3px;"
@@ -366,7 +370,6 @@
               <label for="message-symmetric">Message</label>
             </div>
             <button
-              type="button"
               onclick="clearInput('message-symmetric')"
               class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
               title="Clear"
@@ -384,10 +387,9 @@
             spellcheck="false"
           ></textarea>
           <button
-            type="button"
             onclick="symmetricEncrypt()"
-            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5
-              rounded font-medium w-full mt-2"
+            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5
+              rounded font-semibold w-full mt-2"
           >
             Encrypt
           </button>
@@ -398,7 +400,6 @@
               <label for="encrypted-message-symmetric">Encrypted message</label>
             </div>
             <button
-              type="button"
               onclick="clearInput('encrypted-message-symmetric')"
               class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
               title="Clear"
@@ -416,10 +417,9 @@
             spellcheck="false"
           ></textarea>
           <button
-            type="button"
             onclick="symmetricDecrypt()"
-            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 py-1.5
-              rounded font-medium w-full mt-2"
+            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5
+              rounded font-semibold w-full mt-2"
           >
             Decrypt
           </button>
@@ -427,6 +427,6 @@
       </div>
     </div>
   </div>
-  <script src="/js/main-f8ac4a1cd6045e6ef6a88de8344610f5.js"></script>
+  <script src="/main-b3a3279d5e.js"></script>
 </body>
 </html>

@@ -143,14 +143,16 @@ function generateKeyChat() {
 }
 
 function passwordToPrivateKey(password, parameterP) {
-    let privateKey = '';
-    for (let i = 0; i < password.length; i++) {
-        if (privateKey.length === parameterP.toString().length) {
-            break;
-        }
-        privateKey += password.charCodeAt(i).toString();
-    }
-    return bigInt(privateKey);
+    let hash256 = CryptoJS.SHA256(password).toString();
+    let hash384 = CryptoJS.SHA384(password).toString();
+    let hash512 = CryptoJS.SHA512(password).toString();
+    let part256 = bigInt(hash256, 16).toString();
+    let part384 = bigInt(hash384, 16).toString();
+    let part512 = bigInt(hash512, 16).toString();
+    let full = `${part256}${part384}${part512}`;
+    let parameterPLength = parameterP.toString().length;
+    let privateKey = bigInt(full.slice(0, parameterPLength - 1));
+    return privateKey;
 }
 
 function switchPassword(btn, passwordId) {
@@ -165,11 +167,13 @@ function switchPassword(btn, passwordId) {
     }
 }
 
-function expandTextarea(textareaId) {
-    let textarea = document.getElementById(textareaId);
+function expandTextarea(id) {
+    let textarea = document.getElementById(id);
+    textarea.style.setProperty('height', '');
     let heightLimit = 370;
-    textarea.style.height = '';
-    textarea.style.height = Math.min(textarea.scrollHeight, heightLimit) + 2 + 'px';
+    let value = Math.min(textarea.scrollHeight, heightLimit) + 2;
+    let height = `${value}px`;
+    textarea.style.setProperty('height', height);
 }
 
 function clearInput(inputId) {
@@ -200,5 +204,33 @@ function setTab() {
     }
 }
 
+function setDefaultParameters() {
+    let randomIndex = Math.floor(Math.random() * defaultParameters.length);
+    document.getElementById('parameters').value = defaultParameters[randomIndex];
+    expandTextarea('parameters');
+}
+
 setTab();
-var key;
+
+let key;
+let p1 = '2_1453856265658174212258980899741931113435364689249840857072969364196';
+p1 += '713642442806566602916436362838411203158846824267432444130722951923548582';
+p1 += '115862312053187382721271267936751941207912865662088636868402561261492261';
+p1 += '542477655472595775653994390413791684279781809081408659500283432996158030';
+p1 += '3721502232165165214601796408442734516728221165974574716379153167';
+let p2 = '2_8656028806505982095326321049235561104042173168568505729179757804449';
+p2 += '578346736149906348759626643458706475015957749967889733998903838230885624';
+p2 += '594865734248158226568582806135364944456006812377599986439323482789560609';
+p2 += '123903616577537215351230548134579725046867440710204574042201708977585319';
+p2 += '352822902550993809625935135206670644813733135202081531882006223';
+let p3 = '5_1346273105614869123852010059094346269056286846898087885579606473986';
+p3 += '046803336654589280041249648650489389961287399273842749062827818101442192';
+p3 += '731638668492276330459644946068067803852958538580338570211855464419088469';
+p3 += '583862772103779114074016474019900448941812004096076632923071426460402090';
+p3 += '5729991961217594417394573659698243685903851300181042849083187319';
+let p4 = '5_9698386735097821995805434800552017746890746834947374321048399550491';
+p4 += '815794209971175570817187604723987512763834509452589252354264064564412766';
+p4 += '983847121898255665274076952700580890085019933034896868062018541570801089';
+p4 += '280901633767959780773825022887792463398276934187672065108230041845671192';
+p4 += '069760957613164087526854586433340900188944040932307092409028039';
+let defaultParameters = [p1, p2, p3, p4];
