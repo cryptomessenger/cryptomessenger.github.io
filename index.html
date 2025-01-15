@@ -2,15 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Cryptomessenger</title>
-  <link rel="stylesheet" href="/css/output-f04799089a.min.css">
+  <!--
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/input.css">
+  -->
+  <link rel="stylesheet" href="css/output-1f5bc52958.min.css">
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"    
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"    
+  >
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
-    integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap"
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css"
+    integrity="sha512-cn16Qw8mzTBKpu08X0fwhTSv02kK/FojjNLz0bwp2xJ4H+yalwzXKFw/5cLzuBZCxGWIA+95X4skzvo8STNtSg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer" 
   >
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"
@@ -24,37 +46,45 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
+  <!--
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+  -->
 </head>
-<body class="text-neutral-50 bg-zinc-950">
-  <div class="max-w-3xl mx-auto p-2">
-    <div class="flex justify-between items-center gap-2 mb-2">
-      <div class="text-lg font-bold">Cryptomessenger</div>
+<body class="text-white bg-neutral-900">
+  <div class="max-w-3xl mx-auto px-3 pb-10 md:border-l md:border-r border-neutral-800 min-h-screen">
+    <div class="flex justify-between items-center gap-2 py-1">
+      <div class="w-5"></div>
+      <div class="text-lg font-bold tracking-tight">Cryptomessenger</div>
       <div class="mt-0.5">
         <a
           href="https://github.com/cryptomessenger/cryptomessenger.github.io"
-          class="text-lg text-zinc-600 hover:text-neutral-50"
+          class="text-xl text-neutral-500 hover:text-inherit"
           target="_blank"
           title="GitHub"
         >
-          <i class="bi bi-github"></i>
+          <i class='bx bxl-github'></i>
         </a>
       </div>
     </div>
-    <div class="grid sm:grid-cols-2 gap-2 mb-8">
+    <div class="grid sm:grid-cols-2 gap-2 mb-8 pt-2 border-t border-neutral-800">
       <div class="grid grid-cols-2 gap-2">
         <button
           onclick="selectTab('create')"
           id="create-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
-            disabled:border-teal-700 disabled:font-semibold"
+          class="py-0.5 border-b-2 border-neutral-800 hover:border-neutral-700
+            disabled:border-indigo-600 disabled:font-semibold"
         >
           Create
         </button>
         <button
           onclick="selectTab('confirm')"
           id="confirm-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
-            disabled:border-teal-700 disabled:font-semibold"
+          class="py-0.5 border-b-2 border-neutral-800 hover:border-neutral-700
+            disabled:border-indigo-600 disabled:font-semibold"
         >
           Confirm
         </button>
@@ -63,16 +93,16 @@
         <button
           onclick="selectTab('chat')"
           id="chat-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
-            disabled:border-teal-700 disabled:font-semibold"
+          class="py-0.5 border-b-2 border-neutral-800 hover:border-neutral-700
+            disabled:border-indigo-600 disabled:font-semibold"
         >
           Chat
         </button>
         <button
           onclick="selectTab('symmetric')"
           id="symmetric-btn"
-          class="py-0.5 border-b-2 border-zinc-800 hover:border-zinc-700
-            disabled:border-teal-700 disabled:font-semibold"
+          class="py-0.5 border-b-2 border-neutral-800 hover:border-neutral-700
+            disabled:border-indigo-600 disabled:font-semibold"
         >
           Symmetric
         </button>
@@ -81,17 +111,18 @@
     <div id="create-tab" class="mb-8 hidden">
       <div class="grid sm:grid-cols-2 gap-2 mb-4 text-center">
         <button
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded font-semibold"
+          class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600 py-1.5 px-3 rounded font-semibold"
           onclick="setDefaultParameters()"
         >
           Set default parameters
         </button>
         <a
           href="https://github.com/cryptomessenger/dh-generator"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded font-semibold"
+          class="flex items-center justify-center gap-1 bg-gray-700 hover:bg-indigo-600
+            active:bg-indigo-600 py-1.5 px-3 rounded font-semibold group"
           target="_blank"
         >
-          Generate parameters <i class="bi bi-arrow-up-right text-sm"></i>
+          Generate parameters <i class='bx bx-link-external text-gray-400 group-hover:text-inherit'></i>
         </a>
       </div>
       <div class="mb-4">
@@ -101,18 +132,19 @@
           </div>
           <button
             onclick="clearInput('parameters')"
-            class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
+            class="flex items-center p-1 text-neutral-500 hover:text-inherit
+              hover:bg-neutral-800 rounded"
             title="Clear"
           >
-            <i class="bi bi-x-lg flex w-3.5 h-3.5 text-sm"></i>
+            <i class='bx bx-x'></i>
           </button>
         </div>
         <textarea
           id="parameters"
           oninput="expandTextarea('parameters')"
           rows="4"
-          class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-            hover:border-zinc-700 focus:border-teal-700 outline-none break-all"
+          class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+            hover:border-neutral-600 focus:border-indigo-600 outline-none break-all"
           autocomplete="off"
           spellcheck="false"
         ></textarea>
@@ -125,23 +157,23 @@
           <input
             type="password"
             id="password-create"
-            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
+            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-neutral-700
+              hover:border-neutral-600 focus:border-indigo-600 outline-none"
           >
           <button
             onclick="switchPassword(this, 'password-create')"
-            class="absolute p-2 text-zinc-600 hover:text-teal-600"
+            class="absolute flex p-2 text-neutral-500 hover:text-inherit hover:bg-neutral-800 rounded-sm"
             style="right: 3px; bottom: 3px;"
             title="Switch visibility"
           >
-            <i class="bi bi-eye-slash flex w-4 h-4"></i>
+            <i class='bx bx-hide'></i>
           </button>
         </div>
       </div>
       <div class="mb-6">
         <div class="mb-0.5">
           <label for="iterations-create">
-            Iterations: <span id="iterations-create-display">300000</span>
+            Iterations: <span id="iterations-create-display">550000</span>
           </label>
         </div>
         <input
@@ -149,22 +181,23 @@
           id="iterations-create"
           oninput="displayValue('iterations-create')"
           class="w-full cursor-pointer"
-          min="10000"
+          min="100000"
           max="1000000"
-          value="300000"
-          step="10000"
+          value="550000"
+          step="5000"
           autocomplete="off"
         >
       </div>
       <div class="flex justify-center">
         <button
           onclick="createConfigA()"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 sm:px-7 rounded font-semibold"
+          class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600
+            py-1.5 px-3 sm:px-7 rounded font-semibold disabled:bg-gray-700"
         >
           Create and copy configuration A
         </button>
       </div>
-      <div id="copied-a" class="mt-4 text-center text-teal-600 hidden">Copied</div>
+      <div id="copied-a" class="mt-4 break-all hidden">Copied: </div>
     </div>
     <div id="confirm-tab" class="mb-8 hidden">
       <div class="mb-4">
@@ -175,8 +208,8 @@
           id="config-a"
           oninput="expandTextarea('config-a')"
           rows="4"
-          class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-            hover:border-zinc-700 focus:border-teal-700 outline-none break-all"
+          class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+            hover:border-neutral-600 focus:border-indigo-600 outline-none break-all"
           autocomplete="off"
           spellcheck="false"
         ></textarea>
@@ -189,28 +222,29 @@
           <input
             type="password"
             id="password-confirm"
-            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
+            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-neutral-700
+              hover:border-neutral-600 focus:border-indigo-600 outline-none"
           >
           <button
             onclick="switchPassword(this, 'password-confirm')"
-            class="absolute p-2 text-zinc-600 hover:text-teal-600"
+            class="absolute flex p-2 text-neutral-500 hover:text-inherit hover:bg-neutral-800 rounded-sm"
             style="right: 3px; bottom: 3px;"
             title="Switch visibility"
           >
-            <i class="bi bi-eye-slash flex w-4 h-4"></i>
+            <i class='bx bx-hide'></i>
           </button>
         </div>
       </div>
       <div class="flex justify-center">
         <button
           onclick="createConfigB()"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 sm:px-7 rounded font-semibold"
+          class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600
+            py-1.5 px-3 sm:px-7 rounded font-semibold disabled:bg-gray-700"
         >
           Create and copy configuration B
         </button>
       </div>
-      <div id="copied-b" class="mt-4 text-center text-teal-600 hidden">Copied</div>
+      <div id="copied-b" class="mt-4 break-all hidden"></div>
     </div>
     <div id="chat-tab" class="mb-8 hidden">
       <div class="mb-4">
@@ -221,8 +255,8 @@
           id="config"
           oninput="expandTextarea('config')"
           rows="4"
-          class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-            hover:border-zinc-700 focus:border-teal-700 outline-none break-all"
+          class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+            hover:border-neutral-600 focus:border-indigo-600 outline-none break-all"
           autocomplete="off"
           spellcheck="false"
         ></textarea>
@@ -235,23 +269,24 @@
           <input
             type="password"
             id="password-chat"
-            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
+            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-neutral-700
+              hover:border-neutral-600 focus:border-indigo-600 outline-none"
           >
           <button
             onclick="switchPassword(this, 'password-chat')"
-            class="absolute p-2 text-zinc-600 hover:text-teal-600"
+            class="absolute flex p-2 text-neutral-500 hover:text-inherit hover:bg-neutral-800 rounded-sm"
             style="right: 3px; bottom: 3px;"
             title="Switch visibility"
           >
-            <i class="bi bi-eye-slash flex w-4 h-4"></i>
+            <i class='bx bx-hide'></i>
           </button>
         </div>
       </div>
       <div class="flex justify-center">
         <button
           onclick="generateKeyChat()"
-          class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 sm:px-7 rounded font-semibold"
+          class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600
+            py-1.5 px-3 sm:px-7 rounded font-semibold"
         >
           Generate key
         </button>
@@ -259,68 +294,69 @@
       <div id="chat-body" class="mt-4 hidden">
         <div class="grid sm:grid-cols-2 gap-2">
           <div class="mb-4">
-            <div class="flex justify-between items-end">
-              <div class="mb-0.5">
+            <div class="flex justify-between items-end mb-0.5">
+              <div>
                 <label for="message-chat">Message</label>
               </div>
               <button
                 onclick="clearInput('message-chat')"
-                class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
+                class="flex items-center p-1 text-neutral-500 hover:text-inherit
+                  hover:bg-neutral-800 rounded"
                 title="Clear"
               >
-                <i class="bi bi-x-lg flex w-3.5 h-3.5 text-sm"></i>
+                <i class='bx bx-x'></i>
               </button>
             </div>
             <textarea
               id="message-chat"
               oninput="expandTextarea('message-chat')"
               rows="4"
-              class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-                hover:border-zinc-700 focus:border-teal-700 outline-none"
+              class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+                hover:border-neutral-600 focus:border-indigo-600 outline-none"
               autocomplete="off"
               spellcheck="false"
             ></textarea>
             <button
               onclick="encryptMessage(this)"
-              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded
-                font-semibold w-full mt-2"
+              class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600
+                py-1.5 px-3 sm:px-7 rounded font-semibold disabled:bg-gray-700 w-full mt-2"
             >
               Encrypt and copy
             </button>
           </div>
           <div class="mb-4">
-            <div class="flex justify-between items-end">
-              <div class="mb-0.5">
+            <div class="flex justify-between items-end mb-0.5">
+              <div>
                 <label for="encrypted-message-chat">Encrypted message</label>
               </div>
               <button
                 onclick="clearInput('encrypted-message-chat')"
-                class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
+                class="flex items-center p-1 text-neutral-500 hover:text-inherit
+                  hover:bg-neutral-800 rounded"
                 title="Clear"
               >
-                <i class="bi bi-x-lg flex w-3.5 h-3.5 text-sm"></i>
+                <i class='bx bx-x'></i>
               </button>
             </div>
             <textarea
               id="encrypted-message-chat"
               oninput="expandTextarea('encrypted-message-chat')"
               rows="4"
-              class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-                hover:border-zinc-700 focus:border-teal-700 outline-none break-all"
+              class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+                hover:border-neutral-600 focus:border-indigo-600 outline-none break-all"
               autocomplete="off"
               spellcheck="false"
             ></textarea>
             <button
               onclick="decryptMessage()"
-              class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5 rounded
-                font-semibold w-full mt-2"
+              class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600
+                py-1.5 px-3 sm:px-7 rounded font-semibold w-full mt-2"
             >
               Decrypt
             </button>
           </div>
         </div>
-        <div id="messages" class="mt-4">
-        </div>
+        <div id="messages" class="mt-4"></div>
       </div>
     </div>
     <div id="symmetric-tab" class="mb-8 hidden">
@@ -332,23 +368,23 @@
           <input
             type="password"
             id="password-symmetric"
-            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none font-mono"
+            class="bg-inherit py-1.5 pl-2.5 pr-9 w-full rounded border border-neutral-700
+              hover:border-neutral-600 focus:border-indigo-600 outline-none"
           >
           <button
             onclick="switchPassword(this, 'password-symmetric')"
-            class="absolute p-2 text-zinc-600 hover:text-teal-600"
+            class="absolute flex p-2 text-neutral-500 hover:text-inherit hover:bg-neutral-800 rounded-sm"
             style="right: 3px; bottom: 3px;"
             title="Switch visibility"
           >
-            <i class="bi bi-eye-slash flex w-4 h-4"></i>
+            <i class='bx bx-hide'></i>
           </button>
         </div>
       </div>
       <div class="mb-4">
         <div class="mb-0.5">
           <label for="iterations-symmetric">
-            Iterations: <span id="iterations-symmetric-display">300000</span>
+            Iterations: <span id="iterations-symmetric-display">550000</span>
           </label>
         </div>
         <input
@@ -356,69 +392,71 @@
           id="iterations-symmetric"
           oninput="displayValue('iterations-symmetric')"
           class="w-full cursor-pointer"
-          min="10000"
+          min="100000"
           max="1000000"
-          value="300000"
-          step="10000"
+          value="550000"
+          step="5000"
           autocomplete="off"
         >
       </div>
       <div class="grid sm:grid-cols-2 gap-2">
         <div class="mb-4">
-          <div class="flex justify-between items-end">
-            <div class="mb-0.5">
+          <div class="flex justify-between items-end mb-0.5">
+            <div>
               <label for="message-symmetric">Message</label>
             </div>
             <button
               onclick="clearInput('message-symmetric')"
-              class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
+              class="flex items-center p-1 text-neutral-500 hover:text-inherit
+                hover:bg-neutral-800 rounded"
               title="Clear"
             >
-              <i class="bi bi-x-lg flex w-3.5 h-3.5 text-sm"></i>
+              <i class='bx bx-x'></i>
             </button>
           </div>
           <textarea
             id="message-symmetric"
             oninput="expandTextarea('message-symmetric')"
             rows="4"
-            class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none"
+            class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+              hover:border-neutral-600 focus:border-indigo-600 outline-none"
             autocomplete="off"
             spellcheck="false"
           ></textarea>
           <button
             onclick="symmetricEncrypt()"
-            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5
+            class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600 py-1.5 px-3
               rounded font-semibold w-full mt-2"
           >
             Encrypt
           </button>
         </div>
         <div class="mb-4">
-          <div class="flex justify-between items-end">
-            <div class="mb-0.5">
+          <div class="flex justify-between items-end mb-0.5">
+            <div>
               <label for="encrypted-message-symmetric">Encrypted message</label>
             </div>
             <button
               onclick="clearInput('encrypted-message-symmetric')"
-              class="pl-1 py-1 text-zinc-600 hover:text-teal-600"
+              class="flex items-center p-1 text-neutral-500 hover:text-inherit
+                hover:bg-neutral-800 rounded"
               title="Clear"
             >
-              <i class="bi bi-x-lg flex w-3.5 h-3.5 text-sm"></i>
+              <i class='bx bx-x'></i>
             </button>
           </div>
           <textarea
             id="encrypted-message-symmetric"
             oninput="expandTextarea('encrypted-message-symmetric')"
             rows="4"
-            class="bg-inherit py-1.5 px-2.5 w-full rounded border border-zinc-800
-              hover:border-zinc-700 focus:border-teal-700 outline-none break-all"
+            class="bg-inherit py-1.5 px-2.5 w-full rounded border border-neutral-700
+              hover:border-neutral-600 focus:border-indigo-600 outline-none break-all"
             autocomplete="off"
             spellcheck="false"
           ></textarea>
           <button
             onclick="symmetricDecrypt()"
-            class="bg-zinc-700 hover:bg-teal-700 active:bg-teal-700 p-1.5
+            class="bg-gray-700 hover:bg-indigo-600 active:bg-indigo-600 py-1.5 px-3
               rounded font-semibold w-full mt-2"
           >
             Decrypt
@@ -427,6 +465,6 @@
       </div>
     </div>
   </div>
-  <script src="/main-b3a3279d5e.js"></script>
+  <script src="main-f4fe92cab1.js"></script>
 </body>
 </html>

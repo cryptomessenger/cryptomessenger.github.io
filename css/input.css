@@ -7,6 +7,8 @@ html {
 }
 body {
     font-size: 16px;
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0;
 }
 input[type=range] {
     -webkit-appearance: none;
@@ -14,7 +16,10 @@ input[type=range] {
     height: 8px;
     border-radius: 4px;
     background-color: inherit;
-    border: solid 1px rgb(39, 39, 42);
+    border: solid 1px rgb(64, 64, 64);
+}
+input[type=range]:hover {
+    border-color: rgb(82, 82, 82);
 }
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -22,23 +27,23 @@ input[type=range]::-webkit-slider-thumb {
     width: 17px;
     height: 17px;
     border-radius: 8.5px;
-    background-color: rgb(63, 63, 70);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    background-color: rgb(55, 65, 81);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     border: none;
 }
 input[type=range]::-moz-range-thumb {
     width: 17px;
     height: 17px;
     border-radius: 8.5px;
-    background-color: rgb(63, 63, 70);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    background-color: rgb(55, 65, 81);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     border: none;
 }
 input[type=range]::-webkit-slider-thumb:hover,
 input[type=range]::-webkit-slider-thumb:active {
-    background-color: rgb(15, 118, 110);
+    background-color: rgb(79, 70, 229);
 }
 input[type=range]::-moz-range-thumb:hover,
 input[type=range]::-moz-range-thumb:active {
-    background-color: rgb(15, 118, 110);
+    background-color: rgb(79, 70, 229);
 }

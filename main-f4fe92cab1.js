@@ -22,9 +22,12 @@ function encryptMessage(btn) {
     encryptedArray.push(ciphertext);
     let encrypted = encryptedArray.join('_');
     navigator.clipboard.writeText(encrypted).then(() => {
+        let btnText = btn.innerHTML;
         btn.innerHTML = 'Copied';
+        btn.disabled = true;
         setTimeout(() => {
-            btn.innerHTML = 'Encrypt and copy';
+            btn.innerHTML = btnText;
+            btn.disabled = false;
         }, '1500');
     });
 }
@@ -104,6 +107,7 @@ function createConfigA() {
     configArray.push(publicKey.toString());
     let config = configArray.join('_');
     navigator.clipboard.writeText(config).then(() => {
+        document.getElementById('copied-a').innerHTML = `Copied: ${config}`;
         document.getElementById('copied-a').classList.remove('hidden');
     });
 }
@@ -122,6 +126,7 @@ function createConfigB() {
     configArray[5] = publicKey.toString();
     let config = configArray.join('_');
     navigator.clipboard.writeText(config).then(() => {
+        document.getElementById('copied-b').innerHTML = `Copied: ${config}`;
         document.getElementById('copied-b').classList.remove('hidden');
     });
 }
@@ -160,10 +165,10 @@ function switchPassword(btn, passwordId) {
     let icon = btn.querySelector('i');
     if (password.type === 'password') {
         password.type = 'text';
-        icon.classList.replace('bi-eye-slash', 'bi-eye');
+        icon.classList.replace('bx-hide', 'bx-show');
     } else {
         password.type = 'password';
-        icon.classList.replace('bi-eye', 'bi-eye-slash');
+        icon.classList.replace('bx-show', 'bx-hide');
     }
 }
 
