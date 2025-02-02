@@ -165,10 +165,10 @@ function switchPassword(btn, passwordId) {
     let icon = btn.querySelector('i');
     if (password.type === 'password') {
         password.type = 'text';
-        icon.classList.replace('bx-hide', 'bx-show');
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
     } else {
         password.type = 'password';
-        icon.classList.replace('bx-show', 'bx-hide');
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
     }
 }
 
