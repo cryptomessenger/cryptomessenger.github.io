@@ -1,7 +1,29 @@
 @import "tailwindcss";
 
+@theme {
+    --font-sans: 'Roboto', sans-serif;
+    --font-serif: serif;
+    --font-mono: monospace;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Roboto-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/Roboto-SemiBold.woff2') format('woff2');
+}
 html {
     color-scheme: dark;
+}
+body {
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0;
 }
 .btn-1 {
     padding-block: calc(var(--spacing) * 1.5);
