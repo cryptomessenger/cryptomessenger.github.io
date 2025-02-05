@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cryptomessenger</title>
+  <!-- Uncomment for development, comment for production -->
   <!--
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <link rel="stylesheet" href="css/input.css">
@@ -13,13 +14,22 @@
     }
   </style>
   -->
+
+  <!-- Uncomment for production, comment for development -->
   <link rel="stylesheet" href="css/output-48cab3d307.min.css">
-  <!-- https://cdnjs.com/libraries/bootstrap-icons -->
+
+  <!-- Compare the integrity of library files and local files at https://www.srihash.org/ -->
+
+  <!-- https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css -->
   <link rel="stylesheet" href="libraries/bootstrap-icons@1.11.3/bootstrap-icons.min.css">
-  <!-- https://cdnjs.com/libraries/crypto-js -->
-  <script src="libraries/crypto-js@4.2.0/crypto-js.min.js"></script>
-  <!-- https://cdnjs.com/libraries/big-integer -->
+
+  <!-- https://unpkg.com/crypto-js@4.2.0/crypto-js.js -->
+  <script src="libraries/crypto-js@4.2.0/crypto-js.js"></script>
+
+  <!-- https://unpkg.com/big-integer@1.6.52/BigInteger.min.js -->
   <script src="libraries/big-integer@1.6.52/BigInteger.min.js"></script>
+
+  <!-- The main script is always a single unminified file at the end of the head tag -->
   <script defer src="main-afb1fcc2f4.js"></script>
 </head>
 <body class="text-zinc-50 bg-zinc-900">
