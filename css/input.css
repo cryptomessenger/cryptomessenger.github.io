@@ -1,23 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-    --font-sans: 'Roboto', sans-serif;
+    --font-sans: 'IBMPlexSans', sans-serif;
     --font-serif: serif;
     --font-mono: monospace;
 }
 
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'IBMPlexSans';
     font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/Roboto-Regular.woff2') format('woff2');
+    font-weight: 100 700;
+    src: url('../fonts/IBMPlexSans-VariableFont.woff2') format('woff2');
 }
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 600;
-    src: url('../fonts/Roboto-SemiBold.woff2') format('woff2');
-}
+
 html {
     color-scheme: dark;
 }
@@ -29,7 +24,7 @@ body {
     padding-block: calc(var(--spacing) * 1.5);
     padding-inline: calc(var(--spacing) * 3);
     border-radius: var(--radius-sm);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
     background-color: var(--color-gray-700);
     @media (width >= 40rem) {
         padding-inline: calc(var(--spacing) * 7);
@@ -42,7 +37,7 @@ body {
     padding-block: calc(var(--spacing) * 1.5);
     padding-inline: calc(var(--spacing) * 3);
     border-radius: var(--radius-sm);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
     background-color: var(--color-zinc-800);
 }
 .btn-2:hover, .btn-2:active {
