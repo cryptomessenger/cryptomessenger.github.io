@@ -48,11 +48,12 @@ body {
     padding: calc(var(--spacing) * 1);
     border-radius: var(--radius-sm);
 }
-.btn-3:hover, .btn-3:active, .btn-sp:hover, .btn-sp:active {
+.btn-3:hover, .btn-3:active,
+.toggle-password-btn:hover, .toggle-password-btn:active {
     color: inherit;
     background-color: var(--color-zinc-800);
 }
-.btn-sp {
+.toggle-password-btn {
     color: var(--color-zinc-500);
     padding: calc(var(--spacing) * 2);
     border-radius: var(--radius-xs);

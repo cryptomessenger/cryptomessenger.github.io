@@ -4,33 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cryptomessenger</title>
-  <!-- Uncomment for development, comment for production -->
-  <!--
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="css/input.css">
-  <style>
-    body {
-      font-family: 'IBMPlexSans', sans-serif;
-    }
-  </style>
-  -->
-
-  <!-- Uncomment for production, comment for development -->
-  <link rel="stylesheet" href="css/output-b66d3c840d.min.css">
+  <link rel="stylesheet" href="css/output-0b2d3f5465.min.css">
 
   <!-- Compare the integrity of library files and local files at https://www.srihash.org/ -->
 
-  <!-- https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css -->
-  <link rel="stylesheet" href="libraries/bootstrap-icons@1.11.3/bootstrap-icons.min.css">
+  <!-- https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css -->
+  <link rel="stylesheet" href="libraries/bootstrap-icons@1.11.3/bootstrap-icons.css">
 
-  <!-- https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js -->
-  <script src="libraries/crypto-js@4.2.0/crypto-js.min.js"></script>
+  <!-- https://unpkg.com/crypto-js@4.2.0/crypto-js.js -->
+  <script src="libraries/crypto-js@4.2.0/crypto-js.js"></script>
 
-  <!-- https://unpkg.com/big-integer@1.6.52/BigInteger.min.js -->
-  <script src="libraries/big-integer@1.6.52/BigInteger.min.js"></script>
+  <!-- https://unpkg.com/big-integer@1.6.52/BigInteger.js -->
+  <script src="libraries/big-integer@1.6.52/BigInteger.js"></script>
 
   <!-- The main script is always a single unminified file at the end of the head tag -->
-  <script defer src="main-afb1fcc2f4.js"></script>
+  <script defer src="main-c391cbb9af.js"></script>
 </head>
 <body class="text-zinc-50 bg-zinc-900">
   <div class="max-w-3xl mx-auto px-3 pb-10 md:border-l md:border-r border-zinc-800 min-h-screen">
@@ -49,27 +37,17 @@
     </div>
     <div class="grid sm:grid-cols-2 gap-2 mb-8 pt-2 border-t border-zinc-800">
       <div class="grid grid-cols-2 gap-2">
-        <button id="create-btn" class="tab-btn" onclick="selectTab('create')">
-          Create
-        </button>
-        <button id="confirm-btn" class="tab-btn" onclick="selectTab('confirm')">
-          Confirm
-        </button>
+        <button id="create-btn" class="tab-btn">Create</button>
+        <button id="confirm-btn" class="tab-btn">Confirm</button>
       </div>
       <div class="grid grid-cols-2 gap-2">
-        <button id="chat-btn" class="tab-btn" onclick="selectTab('chat')">
-          Chat
-        </button>
-        <button id="symmetric-btn" class="tab-btn" onclick="selectTab('symmetric')">
-          Symmetric
-        </button>
+        <button id="chat-btn" class="tab-btn">Chat</button>
+        <button id="symmetric-btn" class="tab-btn">Symmetric</button>
       </div>
     </div>
     <div id="create-tab" class="hidden">
       <div class="grid sm:grid-cols-2 gap-2 mb-4">
-        <button class="btn-2" onclick="setDefaultParameters()">
-          Set default parameters
-        </button>
+        <button id="set-default-parameters" class="btn-2">Set default parameters</button>
         <a
           href="https://github.com/cryptomessenger/dh-generator"
           class="btn-2 flex items-center justify-center gap-1.5 text-center group"
@@ -87,7 +65,6 @@
           id="parameters"
           rows="4"
           class="input break-all"
-          oninput="expandTextarea('parameters')"
           autocomplete="off"
         ></textarea>
       </div>
@@ -95,15 +72,13 @@
         <label for="password-create">Password</label>
         <div class="relative">
           <input type="password" id="password-create" class="input">
-          <button onclick="switchPassword(this, 'password-create')" class="btn-sp">
+          <button class="toggle-password-btn" toggle-password="password-create">
             <i class="bi bi-eye-slash"></i>
           </button>
         </div>
       </div>
       <div class="mb-6">
-        <label for="iterations-create">
-          Iterations: <span id="iterations-create-display">550000</span>
-        </label>
+        <label for="iterations-create">Iterations: <span>550000</span></label>
         <input
           type="range"
           id="iterations-create"
@@ -111,16 +86,15 @@
           max="1000000"
           value="550000"
           step="5000"
-          oninput="displayValue('iterations-create')"
           autocomplete="off"
         >
       </div>
       <div class="flex justify-center">
-        <button class="btn-1" onclick="createConfigA()">
+        <button id="create-config-a" class="btn-1">
           Create and copy configuration A
         </button>
       </div>
-      <div id="copied-a" class="mt-4 break-all hidden">Copied: </div>
+      <div id="copied-a" class="mt-4 break-all hidden"></div>
     </div>
     <div id="confirm-tab" class="hidden">
       <div class="mb-4">
@@ -129,7 +103,6 @@
           id="config-a"
           rows="4"
           class="input break-all"
-          oninput="expandTextarea('config-a')"
           autocomplete="off"
           spellcheck="false"
         ></textarea>
@@ -138,13 +111,13 @@
         <label for="password-confirm">Password</label>
         <div class="relative">
           <input type="password" id="password-confirm" class="input">
-          <button class="btn-sp" onclick="switchPassword(this, 'password-confirm')">
+          <button class="toggle-password-btn" toggle-password="password-confirm">
             <i class="bi bi-eye-slash"></i>
           </button>
         </div>
       </div>
       <div class="flex justify-center">
-        <button class="btn-1" onclick="createConfigB()">
+        <button id="create-config-b" class="btn-1">
           Create and copy configuration B
         </button>
       </div>
@@ -157,7 +130,6 @@
           id="config"
           rows="4"
           class="input break-all"
-          oninput="expandTextarea('config')"
           autocomplete="off"
           spellcheck="false"
         ></textarea>
@@ -166,14 +138,14 @@
         <label for="password-chat">Password</label>
         <div class="relative">
           <input type="password" id="password-chat" class="input">
-          <button onclick="switchPassword(this, 'password-chat')" class="btn-sp">
+          <button class="toggle-password-btn" toggle-password="password-chat">
             <i class="bi bi-eye-slash"></i>
           </button>
         </div>
       </div>
       <div class="flex justify-center">
-        <button class="btn-1" onclick="generateKeyChat()">
-          Generate key
+        <button id="get-encryption-key" class="btn-1">
+          Get encryption key
         </button>
       </div>
       <div id="chat-body" class="mt-4 hidden">
@@ -181,37 +153,35 @@
           <div class="mb-4">
             <div class="flex justify-between items-end">
               <label for="message-chat">Message</label>
-              <button class="btn-3 mb-0.5" onclick="clearInput('message-chat')">
+              <button class="btn-3 mb-0.5" clear-input="message-chat">
                 <i class="bi bi-x"></i>
               </button>
             </div>
             <textarea
               id="message-chat"
-              rows="4"
+              rows="8"
               class="input"
-              oninput="expandTextarea('message-chat')"
               autocomplete="off"
             ></textarea>
-            <button class="btn-1 w-full mt-2" onclick="encryptMessage(this)">
+            <button id="encrypt-message" class="btn-1 w-full mt-2">
               Encrypt and copy
             </button>
           </div>
           <div class="mb-4">
             <div class="flex justify-between items-end">
               <label for="encrypted-message-chat">Encrypted message</label>
-              <button class="btn-3 mb-0.5" onclick="clearInput('encrypted-message-chat')">
+              <button class="btn-3 mb-0.5" clear-input="encrypted-message-chat">
                 <i class="bi bi-x"></i>
               </button>
             </div>
             <textarea
               id="encrypted-message-chat"
-              rows="4"
+              rows="8"
               class="input break-all"
-              oninput="expandTextarea('encrypted-message-chat')"
               autocomplete="off"
               spellcheck="false"
             ></textarea>
-            <button class="btn-1 w-full mt-2" onclick="decryptMessage()">
+            <button id="decrypt-message" class="btn-1 w-full mt-2">
               Decrypt
             </button>
           </div>
@@ -224,15 +194,13 @@
         <label for="password-symmetric">Password</label>
         <div class="relative">
           <input type="password" id="password-symmetric" class="input">
-          <button onclick="switchPassword(this, 'password-symmetric')" class="btn-sp">
+          <button class="toggle-password-btn" toggle-password="password-symmetric">
             <i class="bi bi-eye-slash"></i>
           </button>
         </div>
       </div>
       <div class="mb-4">
-        <label for="iterations-symmetric">
-          Iterations: <span id="iterations-symmetric-display">550000</span>
-        </label>
+        <label for="iterations-symmetric">Iterations: <span>550000</span></label>
         <input
           type="range"
           id="iterations-symmetric"
@@ -240,7 +208,6 @@
           max="1000000"
           value="550000"
           step="5000"
-          oninput="displayValue('iterations-symmetric')"
           autocomplete="off"
         >
       </div>
@@ -248,37 +215,35 @@
         <div class="mb-4">
           <div class="flex justify-between items-end">
             <label for="message-symmetric">Message</label>
-            <button class="btn-3 mb-0.5" onclick="clearInput('message-symmetric')">
+            <button class="btn-3 mb-0.5" clear-input="message-symmetric">
               <i class='bi bi-x'></i>
             </button>
           </div>
           <textarea
             id="message-symmetric"
-            rows="4"
+            rows="8"
             class="input"
-            oninput="expandTextarea('message-symmetric')"
             autocomplete="off"
           ></textarea>
-          <button class="btn-1 w-full mt-2" onclick="symmetricEncrypt()">
+          <button id="encrypt-symmetric" class="btn-1 w-full mt-2">
             Encrypt
           </button>
         </div>
         <div class="mb-4">
           <div class="flex justify-between items-end">
             <label for="encrypted-message-symmetric">Encrypted message</label>
-            <button class="btn-3 mb-0.5" onclick="clearInput('encrypted-message-symmetric')">
+            <button class="btn-3 mb-0.5" clear-input="encrypted-message-symmetric">
               <i class='bi bi-x'></i>
             </button>
           </div>
           <textarea
             id="encrypted-message-symmetric"
-            rows="4"
+            rows="8"
             class="input break-all"
-            oninput="expandTextarea('encrypted-message-symmetric')"
             autocomplete="off"
             spellcheck="false"
           ></textarea>
-          <button class="btn-1 w-full mt-2" onclick="symmetricDecrypt()">
+          <button id="decrypt-symmetric" class="btn-1 w-full mt-2">
             Decrypt
           </button>
         </div>
