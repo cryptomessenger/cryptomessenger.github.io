@@ -152,14 +152,19 @@ document.getElementById('get-encryption-key').addEventListener('click', function
     if (!configArray || !password) {
         return;
     }
+    let loader = this.querySelector('.loader');
+    loader.classList.remove('hidden');
     let iterations = configArray[1];
     let parameterP = configArray[4];
     let interlocutorPublicKey = configArray[5];
     let privateKey = getPrivateKey(password, parameterP);
     let sharedKey = getSharedKey(privateKey, interlocutorPublicKey, parameterP);
     let salt = generateSalt();
-    encryptionKey = getEncryptionKey(sharedKey, salt, iterations);
-    document.getElementById('chat-body').classList.remove('hidden');
+    setTimeout(() => {
+        encryptionKey = getEncryptionKey(sharedKey, salt, iterations);
+        document.getElementById('chat-body').classList.remove('hidden');
+        loader.classList.add('hidden');
+    }, 1);
 });
 
 document.getElementById('encrypt-message').addEventListener('click', function() {
@@ -182,7 +187,7 @@ document.getElementById('encrypt-message').addEventListener('click', function() 
         btn.innerText = 'Copied';
         setTimeout(() => {
             btn.innerText = btnText;
-        }, '1000');
+        }, 1000);
     });
 });
 
@@ -208,12 +213,17 @@ document.getElementById('encrypt-symmetric').addEventListener('click', function(
     if (!message || !password) {
         return;
     }
+    let loader = this.querySelector('.loader');
+    loader.classList.remove('hidden');
     let iterations = document.getElementById('iterations-symmetric').value;
     let salt = generateSalt();
-    let encryptionKey = getEncryptionKey(password, salt, iterations);
-    let [ciphertext, iv] = encryptText(message, encryptionKey);
-    let encryptedMessage = [iterations, salt, iv, ciphertext].join('_');
-    document.getElementById('encrypted-message-symmetric').value = encryptedMessage;
+    setTimeout(() => {
+        let encryptionKey = getEncryptionKey(password, salt, iterations);
+        let [ciphertext, iv] = encryptText(message, encryptionKey);
+        let encryptedMessage = [iterations, salt, iv, ciphertext].join('_');
+        document.getElementById('encrypted-message-symmetric').value = encryptedMessage;
+        loader.classList.add('hidden');
+    }, 1);
 });
 
 document.getElementById('decrypt-symmetric').addEventListener('click', function() {
@@ -222,17 +232,22 @@ document.getElementById('decrypt-symmetric').addEventListener('click', function(
     if (!encrypted || !password) {
         return;
     }
+    let loader = this.querySelector('.loader');
+    loader.classList.remove('hidden');
     let encryptedArray = encrypted.split('_');
     let iterations = encryptedArray[0];
     let salt = encryptedArray[1];
     let iv = encryptedArray[2];
     let ciphertext = encryptedArray[3];
-    let encryptionKey = getEncryptionKey(password, salt, iterations);
-    let plaintext = decryptText(ciphertext, encryptionKey, iv);
-    document.getElementById('message-symmetric').value = plaintext;
-    document.getElementById('iterations-symmetric').value = iterations;
-    let label = document.querySelector('label[for="iterations-symmetric"]');
-    label.querySelector('span').innerText = iterations;
+    setTimeout(() => {
+        let encryptionKey = getEncryptionKey(password, salt, iterations);
+        let plaintext = decryptText(ciphertext, encryptionKey, iv);
+        document.getElementById('message-symmetric').value = plaintext;
+        document.getElementById('iterations-symmetric').value = iterations;
+        let label = document.querySelector('label[for="iterations-symmetric"]');
+        label.querySelector('span').innerText = iterations;
+        loader.classList.add('hidden');
+    }, 1);
 });
 
 document.querySelectorAll('.tab-btn').forEach(btn => {

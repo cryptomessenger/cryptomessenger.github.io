@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cryptomessenger</title>
-  <link rel="stylesheet" href="css/output-0b2d3f5465.min.css">
+  <link rel="stylesheet" href="css/output-a9541bf406.min.css">
 
   <!-- Compare the integrity of library files and local files at https://www.srihash.org/ -->
 
@@ -18,7 +18,7 @@
   <script src="libraries/big-integer@1.6.52/BigInteger.js"></script>
 
   <!-- The main script is always a single unminified file at the end of the head tag -->
-  <script defer src="main-c391cbb9af.js"></script>
+  <script defer src="main-64b9b808d3.js"></script>
 </head>
 <body class="text-zinc-50 bg-zinc-900">
   <div class="max-w-3xl mx-auto px-3 pb-10 md:border-l md:border-r border-zinc-800 min-h-screen">
@@ -144,8 +144,11 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <button id="get-encryption-key" class="btn-1">
-          Get encryption key
+        <button
+          id="get-encryption-key"
+          class="btn-1 flex items-center justify-center gap-1.5"
+        >
+          Get encryption key<span class="loader hidden"></span>
         </button>
       </div>
       <div id="chat-body" class="mt-4 hidden">
@@ -225,8 +228,11 @@
             class="input"
             autocomplete="off"
           ></textarea>
-          <button id="encrypt-symmetric" class="btn-1 w-full mt-2">
-            Encrypt
+          <button
+            id="encrypt-symmetric"
+            class="btn-1 flex items-center justify-center gap-1.5 w-full mt-2"
+          >
+            Encrypt<span class="loader hidden"></span>
           </button>
         </div>
         <div class="mb-4">
@@ -243,8 +249,11 @@
             autocomplete="off"
             spellcheck="false"
           ></textarea>
-          <button id="decrypt-symmetric" class="btn-1 w-full mt-2">
-            Decrypt
+          <button
+            id="decrypt-symmetric"
+            class="btn-1 flex items-center justify-center gap-1.5 w-full mt-2"
+          >
+            Decrypt<span class="loader hidden"></span>
           </button>
         </div>
       </div>
