@@ -71,7 +71,7 @@ function decryptText(ciphertext, key, ivBase64) {
  */
 function getPrivateKey(password, parameterP) {
     let numbers = '';
-    [224, 256, 384, 512].forEach((length) => {
+    [224, 256, 384, 512].forEach(length => {
         let hash = CryptoJS.SHA3(password, {outputLength: length}).toString();
         numbers += bigInt(hash, 16).toString();
     });
@@ -286,16 +286,13 @@ document.querySelectorAll('[clear-input]').forEach(btn => {
     });
 });
 
-document.getElementById('set-default-parameters').addEventListener('click', function() {
-    let dp = '';
-    dp += '2_1782578444423474839440738406669065946642221786513635234790472238275946';
-    dp += '794875076307832573582173804829148637388519597557648683968477258737106317';
-    dp += '661944003702601302185582079270921770213165311491801302491282821312291909';
-    dp += '126251932840380608911962561050354200704653138443322968544337605855071750';
-    dp += '228998123216715758781597668474485101572364979656323690363080930028283287';
-    dp += '991446084235645782209378779838238715915861384096287403261280047819395583';
-    dp += '083877774003354338133955237055129029635496485869075537496414259860329872';
-    dp += '331107430998305608486409130596783266326492247729857947148670724351616462';
-    dp += '0147943747710946021207583384890856965783999';
-    document.getElementById('parameters').value = dp;
+document.getElementById('select-parameters').addEventListener('click', function() {
+    let url = 'https://raw.githubusercontent.com/cryptomessenger';
+    url += '/dh-parameters/refs/heads/main/parameters_2048.json';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            let randomIndex = Math.floor(Math.random() * data['parameters'].length);
+            document.getElementById('parameters').value = data['parameters'][randomIndex];
+        });
 });
